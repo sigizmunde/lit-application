@@ -3,7 +3,6 @@ import { Router } from '@vaadin/router';
 import './pages/home-view.js';
 import './pages/about-view.js';
 import { customElement } from 'lit/decorators.js';
-import { routes as blogsRoutes } from './pages/blogs/index.js';
 
 @customElement('lit-application')
 export class LitApplication extends LitElement {
@@ -13,7 +12,12 @@ export class LitApplication extends LitElement {
     router.setRoutes([
       { path: '/', component: 'home-view' },
       { path: '/about', component: 'about-view' },
-      ...blogsRoutes,
+      // Using dynamic import for lazy loading of blog routes
+      {
+        path: '/blogs',
+        children: () =>
+          import('./pages/blogs/index.js').then(module => module.routes),
+      },
       { path: '(.*)', redirect: '/' },
     ]);
   }
@@ -23,6 +27,9 @@ export class LitApplication extends LitElement {
   render() {
     return html`
       <main>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/blogs">Blogs</a>
         <div id="outlet"></div>
       </main>
     `;
