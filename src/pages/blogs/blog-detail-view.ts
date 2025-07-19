@@ -11,7 +11,7 @@ export class BlogDetailView extends LitElement {
     `,
   ];
 
-  @property({ type: Number })
+  @property()
   blogId: number | undefined;
 
   constructor() {
