@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit';
 import { Router } from '@vaadin/router';
+import { customElement } from 'lit/decorators.js';
 import './pages/home-view.js';
 import './pages/about-view.js';
-import { customElement } from 'lit/decorators.js';
+import './pages/gallery/gallery-view.js';
 
 @customElement('lit-application')
 export class LitApplication extends LitElement {
@@ -18,6 +19,11 @@ export class LitApplication extends LitElement {
         children: () =>
           import('./pages/blogs/index.js').then(module => module.routes),
       },
+      {
+        path: '/gallery',
+        children: () =>
+          import('./pages/gallery/index.js').then(module => module.routes),
+      },
       { path: '(.*)', redirect: '/' },
     ]);
   }
@@ -29,6 +35,7 @@ export class LitApplication extends LitElement {
       <main>
         <a href="/">Home</a>
         <a href="/about">About</a>
+        <a href="/gallery">Gallery</a>
         <a href="/blogs">Blogs</a>
         <div id="outlet"></div>
       </main>

@@ -19,6 +19,7 @@
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"web-dev-server\""
   },
   "dependencies": {
+    "@lit/task": "^1.0.3",
     "@vaadin/router": "^2.0.0",
     "lit": "^3.1.4"
   },
